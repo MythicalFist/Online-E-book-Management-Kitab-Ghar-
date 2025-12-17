@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Ghar - E-Book Management</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <span>Kitab Ghar</span>
+            </div>
+
+            <ul class="nav-links">
+                <li class="active" data-target="home">
+                    <a href="#"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+                </li>
+                <li data-target="library">
+                    <a href="#"><i class="fa-solid fa-book"></i> <span>Library</span></a>
+                </li>
+                <li data-target="users">
+                    <a href="#"><i class="fa-solid fa-users"></i> <span>Users</span></a>
+                </li>
+
+
+
+                <li data-target="help">
+                    <a href="#"><i class="fa-solid fa-circle-question"></i> <span>Help</span></a>
+                </li>
+                <li data-target="account">
+                    <a href="#"><i class="fa-solid fa-user-shield"></i> <span>Account</span></a>
+                </li>
+            </ul>
+
+            <div class="user-mini-profile">
+                <img src="admin_profile_pic.jpg" alt="User" style="object-fit: cover;">
+                <div class="user-info">
+                    <h4>Chandrachur</h4>
+                    <p>Super Admin</p>
+                </div>
+                <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="top-actions">
+
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </header>
+
+            <!-- 1. Home / Dashboard -->
+            <section id="home" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-book"></i></div>
+                        <div class="stat-info">
+                            <h3>Total eBooks</h3>
+                            <p class="stat-number">1,245</p>
+                            <p class="stat-trend positive">+12% this month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3>Active Members</h3>
+                            <p class="stat-number">8,530</p>
+                            <p class="stat-trend positive">+5% this week</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-download"></i></div>
+                        <div class="stat-info">
+                            <h3>Downloads</h3>
+                            <p class="stat-number">45.2k</p>
+                            <p class="stat-trend">Daily Avg: 1.2k</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-eye"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Views</h3>
+                            <p class="stat-number">120k</p>
+                            <p class="stat-trend positive">+8% vs last month</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Home Book Management Section -->
+                <!-- Library Updates Section -->
+                <div class="section-header" style="margin-top: 30px; margin-bottom: 20px;">
+                    <h2>Library Updates</h2>
+                </div>
+
+                <div class="updates-container">
+                    <div class="updates-feed" id="updates-feed">
+                        <!-- Example Updates -->
+                        <div class="update-card">
+                            <div class="update-header">
+                                <span class="admin-badge">Admin</span>
+                                <span class="update-time">Just now</span>
+                            </div>
+                            <p class="update-text">Welcome to the new Library Management System! We have added several
+                                new features including a dark mode and a comprehensive book list.</p>
+                        </div>
+                        <div class="update-card">
+                            <div class="update-header">
+                                <span class="admin-badge">Admin</span>
+                                <span class="update-time">2 hours ago</span>
+                            </div>
+                            <p class="update-text">New stock of Science Fiction novels has arrived. Check out the
+                                Library section for the latest additions.</p>
+                        </div>
+                    </div>
+
+                    <div class="post-update-section">
+                        <textarea id="new-update-text" rows="3"
+                            placeholder="Write an update for library users..."></textarea>
+                        <button class="btn-primary" id="post-update-btn">Post Update</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Library -->
+            <section id="library" class="content-section">
+                <div class="section-controls">
+                    <button class="btn-primary" id="library-add-book-btn"><i class="fa-solid fa-plus"></i> Add
+                        Book</button>
+
+                    <div class="library-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="library-search-input" placeholder="Search books...">
+                    </div>
+
+                    <div class="filters">
+                        <select id="category-filter">
+                            <option>All Categories</option>
+                            <option>Classic</option>
+                            <option>Dystopian</option>
+                            <option>Romance</option>
+                            <option>Fantasy</option>
+                            <option>Satire</option>
+                            <option>Non-Fiction</option>
+                            <option>Sci-Fi</option>
+                            <option>Mystery</option>
+                            <option>Biography</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Library Content (Grid View) -->
+                <div class="book-grid" id="library-book-grid">
+                    <!-- Dynamic Book Cards will be added here -->
+                </div>
+            </section>
+
+            <!-- 3. Users -->
+            <section id="users" class="content-section">
+                <div class="section-controls">
+                    <button class="btn-primary" id="add-user-btn"><i class="fa-solid fa-user-plus"></i> Add
+                        User</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Profile</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+
+            <!-- 5. Operations -->
+
+
+
+
+            <!-- 7. Help -->
+            <section id="help" class="content-section">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h2>Help & Support for user & admin</h2>
+                </div>
+                <div class="help-grid">
+                    <div class="help-card">
+                        <h4>Admin Documentation</h4>
+                        <p>Provides detailed guidance on managing eBooks, users, roles, and system settings, helping
+                            admins operate the platform efficiently.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>System Setup & Configuration Help</h4>
+                        <p>Explains how to configure platform-wide settings such as storage, access rules, and security
+                            options.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Troubleshooting & Error Resolution</h4>
+                        <p>Helps diagnose and resolve issues related to uploads, access failures, performance problems,
+                            and system errors.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Security & Account Recovery Support</h4>
+                        <p>Guides admins on password policies, two-factor authentication, and recovering or securing
+                            compromised accounts.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Update & Feature Change Notes</h4>
+                        <p>Informs admins about new features, system updates, and changes that may affect platform
+                            behavior.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Technical Support Access</h4>
+                        <p>Allows admins to raise support tickets or directly contact the technical team for critical
+                            system issues.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Getting Started Guide</h4>
+                        <p>Introduces users to browsing, searching, reading, and managing eBooks within the platform.
+                        </p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Reading & Download Assistance</h4>
+                        <p>Explains how to read online, download eBooks, bookmark pages, and track reading progress.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Account & Login Help</h4>
+                        <p>Assists users with password recovery, account settings, and login-related issues.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>FAQs & Common Issues</h4>
+                        <p>Addresses frequent user questions regarding access limits, formats, and library usage.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Feedback & Issue Reporting</h4>
+                        <p>Enables users to report problems, suggest improvements, or request new eBooks.</p>
+                    </div>
+                    <div class="help-card">
+                        <h4>Support Contact</h4>
+                        <p>Provides a clear channel to reach customer support for unresolved issues.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Account -->
+            <section id="account" class="content-section">
+                <div class="admin-profile-container">
+                    <div class="profile-header-center">
+                        <div class="profile-wrapper">
+                            <img id="admin-profile-pic" src="admin_profile_pic.jpg" alt="Chandrachur Mukherjee">
+                            <div class="profile-overlay">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                        </div>
+                        <input type="file" id="admin-profile-upload" accept="image/*" style="display: none;">
+                    </div>
+                    <form class="settings-form" id="admin-profile-form">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="admin-username" value="Chandrachur">
+                        </div>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="admin-fullname" value="Chandrachur Mukherjee">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="admin-email" value="chandramukh07@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="admin-password" value="hjhfbsdjbhf">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="text" id="admin-contact" value="8540031257">
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select id="admin-role">
+                                <option value="Administrator">Administrator</option>
+                                <option value="Super Admin" selected>Super Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Save
+                            Profile</button>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <!-- Add Book Modal -->
+    <div id="add-book-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Book</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="add-book-form">
+                <div class="form-group">
+                    <label>Upload Book Cover</label>
+                    <input type="file" id="new-book-image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>Book Title</label>
+                    <input type="text" id="new-book-title" placeholder="Enter book title" required>
+                </div>
+                <div class="form-group">
+                    <label>Genre</label>
+                    <select id="new-book-genre">
+                        <option value="Classic">Classic</option>
+                        <option value="Dystopian">Dystopian</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Satire">Satire</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Biography">Biography</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Author Name</label>
+                    <input type="text" id="new-book-author" placeholder="Enter author name" required>
+                </div>
+                <div class="form-group">
+                    <label>Rating (0-5)</label>
+                    <input type="number" id="new-book-rating" min="0" max="5" step="0.1" placeholder="4.5" required>
+                </div>
+                <div class="form-group">
+                    <label>Upload PDF (Optional)</label>
+                    <input type="file" id="new-book-pdf" accept=".pdf">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%">Add Book</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New User</h3>
+                <span class="close-user-modal">&times;</span>
+            </div>
+            <form id="add-user-form">
+                <div class="form-group">
+                    <label>Profile Picture</label>
+                    <input type="file" id="new-user-image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="new-user-name" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="new-user-role">
+                        <option value="Member">Member</option>
+                        <option value="Editor">Editor</option>
+                        <option value="Guest">Guest</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Joining Date</label>
+                    <input type="text" id="new-user-date" placeholder="DD/MM/YYYY" onfocus="(this.type='date')"
+                        onblur="(this.type='text')" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
